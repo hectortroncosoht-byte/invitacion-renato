@@ -3,14 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invitación Renato – Mario Bros</title>
+<title>🎮 ¡Cumpleaños de Renato!</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Fredoka+One:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--red:#E8252A;--yellow:#FBD000;--blue:#0868B0;--green:#1E8C25;--orange:#F4861F;--brown:#7B3F00}
 body{font-family:'Fredoka One',cursive;background:#0d0d0d;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
-#app{display:flex;flex:1;min-height:100vh}
 
 /* ── INTRO ── */
 #introScreen{position:fixed;inset:0;z-index:999;background:radial-gradient(ellipse at center,#1a0040,#000);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
@@ -24,95 +22,9 @@ body{font-family:'Fredoka One',cursive;background:#0d0d0d;min-height:100vh;displ
 .press-hint{font-family:'Press Start 2P',cursive;font-size:7px;color:#888;animation:blink 1s step-end infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
-/* ── SIDEBAR ── */
-#sidebar{width:320px;min-width:320px;background:#1a0800;border-right:4px solid var(--yellow);display:flex;flex-direction:column;overflow-y:auto;z-index:20}
-#sidebar-header{background:var(--red);padding:14px 16px;border-bottom:4px solid #9B0000;font-family:'Press Start 2P',cursive;font-size:9px;color:var(--yellow);text-align:center;letter-spacing:1px;position:sticky;top:0;z-index:5}
-.section{border-bottom:2px solid rgba(251,208,0,.15)}
-.sec-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;cursor:pointer;user-select:none;font-family:'Press Start 2P',cursive;font-size:7px;color:var(--yellow);letter-spacing:1px;transition:background .15s}
-.sec-head:hover{background:rgba(251,208,0,.06)}
-.sec-arrow{font-size:10px}
-.sec-body{padding:0 14px 12px;display:none}
-.sec-body.open{display:block}
-.field{margin-bottom:10px}
-.field label,.field>.flabel{font-family:'Press Start 2P',cursive;font-size:6px;color:#aaa;display:block;margin-bottom:5px;letter-spacing:1px}
-.field input[type=text],.field input[type=number],.field textarea{width:100%;background:rgba(255,255,255,.07);border:2px solid rgba(251,208,0,.25);border-radius:7px;padding:8px 10px;color:white;font-family:'Fredoka One',cursive;font-size:15px;outline:none;transition:border .2s;resize:vertical}
-.field input:focus,.field textarea:focus{border-color:var(--yellow)}
-.field input[type=color]{width:100%;height:36px;border-radius:7px;border:2px solid rgba(251,208,0,.25);background:none;cursor:pointer;padding:2px}
-.field input[type=range]{width:100%;accent-color:var(--yellow);display:block;margin-top:4px}
-.range-val{font-family:'Press Start 2P',cursive;font-size:7px;color:var(--yellow);text-align:right;margin-top:2px}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.toggle-row>span,.toggle-row>.tl{font-family:'Press Start 2P',cursive;font-size:6px;color:#aaa;letter-spacing:1px}
-.toggle{position:relative;width:42px;height:22px;flex-shrink:0}
-.toggle input{opacity:0;width:0;height:0}
-.tslider{position:absolute;inset:0;background:#333;border-radius:22px;cursor:pointer;transition:.2s}
-.tslider::before{content:'';position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:white;border-radius:50%;transition:.2s}
-input:checked+.tslider{background:var(--green)}
-input:checked+.tslider::before{transform:translateX(20px)}
-.preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.preset-btn{border:2px solid rgba(251,208,0,.3);border-radius:8px;padding:6px 8px;cursor:pointer;font-family:'Press Start 2P',cursive;font-size:6px;color:#ccc;background:rgba(255,255,255,.05);transition:all .15s;white-space:nowrap}
-.preset-btn:hover,.preset-btn.active{border-color:var(--yellow);color:var(--yellow);background:rgba(251,208,0,.15)}
-.sym-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
-.sym-btn{width:32px;height:32px;border:2px solid rgba(251,208,0,.25);border-radius:6px;cursor:pointer;background:rgba(255,255,255,.06);color:var(--yellow);font-family:'Press Start 2P',cursive;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .12s}
-.sym-btn:hover,.sym-btn.active{border-color:var(--yellow);background:rgba(251,208,0,.25)}
-
-/* upload zones */
-.upzone{border:3px dashed rgba(251,208,0,.35);border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:6px}
-.upzone:hover{border-color:var(--yellow);background:rgba(251,208,0,.05)}
-.upzone p{font-family:'Press Start 2P',cursive;font-size:6px;color:#aaa;line-height:2}
-.upzone .uz-thumb{width:60px;height:60px;object-fit:contain;border-radius:8px;display:none;margin:0 auto 4px;border:2px solid var(--yellow)}
-.upzone .uz-audio{font-size:22px;display:none}
-.upzone .uz-ok{font-family:'Press Start 2P',cursive;font-size:6px;color:var(--green);display:none}
-.upzone.loaded{border-color:var(--green)}
-
-/* char upload grid */
-.char-up-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.char-up-item{border:2px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 6px;cursor:pointer;text-align:center;background:rgba(255,255,255,.04);transition:all .15s;position:relative}
-.char-up-item:hover{border-color:var(--yellow);background:rgba(251,208,0,.06)}
-.char-up-item.on{border-color:var(--yellow);background:rgba(251,208,0,.12)}
-.char-up-item img.char-preview{width:54px;height:54px;object-fit:contain;display:block;margin:0 auto 4px;border-radius:4px}
-.char-up-item span.char-label{font-family:'Press Start 2P',cursine;font-family:'Press Start 2P',cursive;font-size:6px;color:#ccc;display:block;margin-bottom:4px}
-.char-up-item.on span.char-label{color:var(--yellow)}
-.char-upload-btn{font-family:'Press Start 2P',cursive;font-size:5px;background:rgba(251,208,0,.1);border:1px solid rgba(251,208,0,.3);color:var(--yellow);border-radius:4px;padding:3px 6px;cursor:pointer;width:100%}
-.char-upload-btn:hover{background:rgba(251,208,0,.25)}
-.char-vis-toggle{position:absolute;top:4px;right:4px;width:14px;height:14px;background:var(--green);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;cursor:pointer}
-.char-vis-toggle.off{background:#555}
-
-/* music bar */
-#musicBar{background:rgba(0,0,0,.4);border:2px solid rgba(251,208,0,.2);border-radius:10px;padding:10px 12px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-#musicBar>span{font-family:'Press Start 2P',cursive;font-size:7px;color:var(--yellow)}
-.eq{display:flex;gap:3px;align-items:flex-end;height:20px}
-.eq-bar{width:4px;background:var(--yellow);border-radius:2px;animation:eqAnim .5s ease-in-out infinite alternate}
-.eq-bar:nth-child(2){animation-delay:.1s}.eq-bar:nth-child(3){animation-delay:.2s}.eq-bar:nth-child(4){animation-delay:.05s}
-@keyframes eqAnim{from{height:20%}to{height:100%}}
-.eq-bar.paused{animation:none;height:30%}
-#musicToggleBtn{font-family:'Press Start 2P',cursive;font-size:7px;background:var(--green);color:white;border:2px solid var(--yellow);border-radius:6px;padding:5px 8px;cursor:pointer;margin-left:auto}
-.vol-row{display:flex;align-items:center;gap:8px}
-.vol-row span{font-family:'Press Start 2P',cursive;font-size:8px;color:#aaa}
-.vol-row input{flex:1;accent-color:var(--yellow)}
-
-/* audio slot */
-.audio-slot{border:2px solid rgba(251,208,0,.2);border-radius:8px;padding:8px 10px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.audio-slot .aslot-name{font-family:'Press Start 2P',cursive;font-size:6px;color:#aaa;flex:1}
-.audio-slot .aslot-status{font-family:'Press Start 2P',cursive;font-size:6px;color:var(--green);display:none}
-.audio-slot button{font-family:'Press Start 2P',cursive;font-size:5px;background:rgba(251,208,0,.1);border:1px solid rgba(251,208,0,.3);color:var(--yellow);border-radius:4px;padding:4px 6px;cursor:pointer;white-space:nowrap}
-.audio-slot button:hover{background:rgba(251,208,0,.25)}
-.audio-slot.loaded .aslot-status{display:block}
-.audio-slot.loaded{border-color:var(--green)}
-
-/* sidebar footer */
-#sidebar-footer{padding:14px;display:flex;flex-direction:column;gap:8px;position:sticky;bottom:0;background:#1a0800;border-top:3px solid rgba(251,208,0,.2)}
-.sb-btn{width:100%;border-radius:10px;padding:12px;font-family:'Press Start 2P',cursive;font-size:8px;cursor:pointer;border:3px solid var(--yellow);transition:transform .08s,filter .1s;display:flex;align-items:center;justify-content:center;gap:8px}
-.sb-btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
-.sb-btn:active{transform:translateY(2px)}
-.sb-btn.dl{background:#25D366;color:white;box-shadow:0 4px 0 #128C50;border-color:#25D366}
-.sb-btn.wsp{background:#128C50;color:white;box-shadow:0 4px 0 #075E35;border-color:#128C50}
-.sb-btn.pr{background:var(--blue);color:white;box-shadow:0 4px 0 #043E72}
-
-/* ── PREVIEW ── */
-#preview{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:30px 20px 80px;transition:background .4s}
+/* ── PREVIEW / ESCENA ── */
+#preview{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:30px 20px 80px;min-height:100vh}
 #preview.sky-mode{background:#6EC6F5;background-image:radial-gradient(circle at 20% 80%,#5BB8F5 0%,transparent 50%),radial-gradient(circle at 80% 20%,#82D4F7 0%,transparent 50%),linear-gradient(180deg,#6EC6F5 60%,#4AA8DE 100%)}
-#bgImg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0;opacity:0;transition:opacity .4s}
-#bgOverlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:rgba(0,0,0,.3)}
 .score-pop{position:fixed;font-family:'Press Start 2P',cursive;font-size:14px;color:var(--yellow);text-shadow:2px 2px 0 var(--brown);pointer-events:none;z-index:200;animation:scorePop 1s ease-out forwards}
 @keyframes scorePop{0%{transform:translateY(0);opacity:1}100%{transform:translateY(-60px);opacity:0}}
 .cloud{position:absolute;background:white;border-radius:50px;opacity:.85;animation:floatCloud linear infinite;z-index:2;cursor:pointer}
@@ -144,10 +56,9 @@ input:checked+.tslider::before{transform:translateX(20px)}
 .hero-img.big{width:110px;height:110px;animation:charRoar 4s ease-in-out infinite}
 @keyframes charBounce{0%,100%{transform:translateY(0)}35%{transform:translateY(-18px)}65%{transform:translateY(0)}}
 @keyframes charRoar{0%,85%,100%{transform:scale(1) rotate(0)}90%{transform:scale(1.08) rotate(-2deg)}95%{transform:scale(1.08) rotate(2deg)}}
-#kidPhoto{width:90px;height:90px;border-radius:50%;border:4px solid var(--yellow);object-fit:cover;box-shadow:0 0 20px rgba(251,208,0,.6);display:none}
-#kidPlaceholder{width:90px;height:90px;border-radius:50%;border:4px dashed var(--yellow);background:rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:4px;transition:background .2s}
-#kidPlaceholder:hover{background:rgba(255,255,255,.15)}
-.ph-icon{font-size:28px}.ph-text{font-family:'Press Start 2P',cursive;font-size:5px;color:#aaa;text-align:center;line-height:1.8}
+#kidPlaceholder{width:90px;height:90px;border-radius:50%;border:4px solid var(--yellow);background:rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 0 20px rgba(251,208,0,.4)}
+.ph-icon{font-size:32px}
+.ph-text{font-family:'Press Start 2P',cursive;font-size:5px;color:var(--yellow);text-align:center;line-height:1.8}
 .name-section{text-align:center;padding:12px 20px 6px}
 #celebraText{font-family:'Press Start 2P',cursive;font-size:8px;color:#aaa;letter-spacing:3px;display:block;margin-bottom:6px}
 #nameDisplay{font-family:'Press Start 2P',cursive;font-size:26px;color:var(--yellow);letter-spacing:2px;display:block;word-break:break-all;text-shadow:3px 3px 0 var(--orange),6px 6px 0 var(--brown),0 0 20px rgba(251,208,0,.5);animation:nameGlow 2s ease-in-out infinite alternate}
@@ -178,8 +89,13 @@ input:checked+.tslider::before{transform:translateX(20px)}
 .spark{position:absolute;width:6px;height:6px;border-radius:50%;animation:sparkFly 1.5s ease-out forwards}
 @keyframes sparkFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
 
-@media(max-width:700px){#app{flex-direction:column}#sidebar{width:100%;min-width:unset;border-right:none;border-top:4px solid var(--yellow);order:2;max-height:55vh}#preview{order:1;min-height:50vh;padding:20px 10px 70px}}
-@media print{#sidebar{display:none}#preview{padding:0}#card{box-shadow:none}}
+/* botón WhatsApp */
+#wspBtn{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 24px 16px;padding:14px;background:#25D366;border:3px solid #1aaf56;border-radius:12px;font-family:'Press Start 2P',cursive;font-size:9px;color:white;cursor:pointer;box-shadow:0 5px 0 #128C50;transition:transform .08s}
+#wspBtn:hover{transform:translateY(-2px)}
+#wspBtn:active{transform:translateY(3px)}
+
+@media(max-width:500px){#nameDisplay{font-size:18px}#preview{padding:20px 8px 70px}}
+@media print{#preview{padding:0}#card{box-shadow:none}#wspBtn{display:none}}
 </style>
 </head>
 <body>
@@ -189,240 +105,11 @@ input:checked+.tslider::before{transform:translateX(20px)}
   <div class="intro-mario">🍄</div>
   <div class="intro-title">¡INVITACIÓN DE<br>CUMPLEAÑOS!</div>
   <button id="startBtn" onclick="startApp()">▶ TOCA PARA EMPEZAR</button>
-  <div class="press-hint">🔊 CON SONIDO</div>
+  <div class="press-hint">🔊 ACTIVAR SONIDO</div>
 </div>
 
-<div id="app" style="display:none">
-
-<!-- ════ SIDEBAR ════ -->
-<div id="sidebar">
-  <div id="sidebar-header">✏️ EDITOR COMPLETO</div>
-
-  <!-- 🎵 MÚSICA Y SONIDO -->
-  <div class="section">
-    <div class="sec-head" onclick="toggleSec(this)"><span>🎵 MÚSICA Y SONIDO</span><span class="sec-arrow">▼</span></div>
-    <div class="sec-body open">
-      <div id="musicBar">
-        <div class="eq"><div class="eq-bar" style="height:70%"></div><div class="eq-bar" style="height:50%"></div><div class="eq-bar" style="height:90%"></div><div class="eq-bar" style="height:60%"></div></div>
-        <span id="musicStatus">♪ ON</span>
-        <button id="musicToggleBtn" onclick="toggleMusic()">⏸ PAUSAR</button>
-      </div>
-
-      <!-- Subir música propia -->
-      <div class="field">
-        <div class="flabel">🎶 SUBIR TU MÚSICA (MP3/OGG/WAV)</div>
-        <div class="upzone" id="musicUpZone" onclick="document.getElementById('musicFileInput').click()">
-          <div class="uz-audio" id="musicUpIcon">🎵</div>
-          <p id="musicUpHint">TOCA PARA SUBIR<br>TU CANCIÓN DE MARIO</p>
-          <div class="uz-ok" id="musicUpOk">✅ MÚSICA CARGADA</div>
-        </div>
-        <input type="file" id="musicFileInput" accept="audio/*" style="display:none" onchange="handleCustomMusic(event)">
-        <div style="display:flex;gap:6px;margin-top:6px">
-          <button class="preset-btn active" id="btnBuiltin" onclick="switchToBuiltin(this)" style="flex:1">🎮 MELODÍA MARIO</button>
-          <button class="preset-btn" id="btnCustom" onclick="switchToCustom(this)" style="flex:1;display:none" id="btnCustomMusic">📁 MI MÚSICA</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>MELODÍA INTEGRADA</label>
-        <div class="preset-row" id="melodyPresets">
-          <div class="preset-btn active" onclick="setMelody(this,'overworld')">🌍 World 1</div>
-          <div class="preset-btn" onclick="setMelody(this,'underground')">🪨 Cueva</div>
-          <div class="preset-btn" onclick="setMelody(this,'star')">⭐ Estrella</div>
-          <div class="preset-btn" onclick="setMelody(this,'castle')">🏰 Castillo</div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>VOLUMEN MÚSICA</label>
-        <div class="vol-row"><span>🔈</span><input type="range" min="0" max="100" value="40" oninput="setMusicVol(this.value)"><span>🔊</span></div>
-      </div>
-      <div class="field">
-        <label>VOLUMEN EFECTOS</label>
-        <div class="vol-row"><span>🔈</span><input type="range" min="0" max="100" value="70" oninput="setFxVol(this.value)"><span>🔊</span></div>
-      </div>
-      <div class="toggle-row">
-        <span>EFECTOS AL TOCAR</span>
-        <label class="toggle"><input type="checkbox" id="tFx" checked><span class="tslider"></span></label>
-      </div>
-
-      <!-- Efectos personalizados -->
-      <div class="field" style="margin-top:8px">
-        <div class="flabel">🔊 SUBIR EFECTOS DE SONIDO</div>
-        <div id="fxSlots">
-          <div class="audio-slot" id="slot-coin"><span class="aslot-name">🪙 Moneda</span><span class="aslot-status">✅</span><button onclick="uploadFx('coin')">📁 SUBIR</button><input type="file" accept="audio/*" style="display:none" onchange="handleFx(event,'coin')"></div>
-          <div class="audio-slot" id="slot-jump"><span class="aslot-name">🦘 Salto Mario</span><span class="aslot-status">✅</span><button onclick="uploadFx('jump')">📁 SUBIR</button><input type="file" accept="audio/*" style="display:none" onchange="handleFx(event,'jump')"></div>
-          <div class="audio-slot" id="slot-block"><span class="aslot-name">📦 Bloque ?</span><span class="aslot-status">✅</span><button onclick="uploadFx('block')">📁 SUBIR</button><input type="file" accept="audio/*" style="display:none" onchange="handleFx(event,'block')"></div>
-          <div class="audio-slot" id="slot-roar"><span class="aslot-name">🐉 Bowser</span><span class="aslot-status">✅</span><button onclick="uploadFx('roar')">📁 SUBIR</button><input type="file" accept="audio/*" style="display:none" onchange="handleFx(event,'roar')"></div>
-          <div class="audio-slot" id="slot-confirm"><span class="aslot-name">🎉 Confirmar</span><span class="aslot-status">✅</span><button onclick="uploadFx('confirm')">📁 SUBIR</button><input type="file" accept="audio/*" style="display:none" onchange="handleFx(event,'confirm')"></div>
-          <div class="audio-slot" id="slot-oneup"><span class="aslot-name">⭐ 1-UP</span><span class="aslot-status">✅</span><button onclick="uploadFx('oneup')">📁 SUBIR</button><input type="file" accept="audio/*" style="display:none" onchange="handleFx(event,'oneup')"></div>
-        </div>
-        <div style="font-family:'Press Start 2P',cursive;font-size:6px;color:#666;line-height:2;margin-top:6px">💡 Si no subís un efecto,<br>se usa el sonido generado.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 📝 TEXTOS -->
-  <div class="section">
-    <div class="sec-head" onclick="toggleSec(this)"><span>📝 TEXTOS</span><span class="sec-arrow">▶</span></div>
-    <div class="sec-body">
-      <div class="field"><label>BANNER SUPERIOR</label><input type="text" value="★ ¡ESTÁS INVITADO! ★" oninput="sync('bannerText',this.value)"></div>
-      <div class="field"><label>TEXTO "CELEBRA SUS"</label><input type="text" value="¡CELEBRA SUS!" oninput="sync('celebraText',this.value)"></div>
-      <div class="field"><label>NOMBRE</label><input type="text" id="iName" value="RENATO" oninput="syncName(this.value)"></div>
-      <div class="field"><label>EDAD</label><input type="number" value="5" min="1" max="99" oninput="sync('ageNum',this.value)"></div>
-      <div class="field"><label>FRASE CONFIRMAR</label><input type="text" value="¿PODÉS ASISTIR?" oninput="sync('confirmLabel',this.value)"></div>
-      <div class="field"><label>TEXTO BOTÓN</label><input type="text" value="¡CONFIRMAR ASISTENCIA!" oninput="syncBtn(this.value)"></div>
-      <div class="field"><label>MENSAJE FINAL</label><textarea rows="2" oninput="syncBottom(this.value)">¡TE ESPERAMOS PARA JUGAR Y CELEBRAR!</textarea></div>
-    </div>
-  </div>
-
-  <!-- 📅 EVENTO -->
-  <div class="section">
-    <div class="sec-head" onclick="toggleSec(this)"><span>📅 DATOS DEL EVENTO</span><span class="sec-arrow">▶</span></div>
-    <div class="sec-body">
-      <div class="field"><label>FECHA</label><input type="text" value="Viernes 20 de Junio" oninput="sync('dateDisplay',this.value)"></div>
-      <div class="field"><label>HORA</label><input type="text" value="15:00 hrs" oninput="sync('timeDisplay',this.value)"></div>
-      <div class="field"><label>LUGAR</label><input type="text" value="Contulmo" oninput="sync('placeDisplay',this.value)"></div>
-      <div class="field"><label>NOTA (vacío = ocultar)</label><input type="text" value="⚠️ Dirección por confirmar" oninput="syncNote(this.value)"></div>
-    </div>
-  </div>
-
-  <!-- 💬 WHATSAPP -->
-  <div class="section">
-    <div class="sec-head" onclick="toggleSec(this)"><span>💬 WHATSAPP</span><span class="sec-arrow">▶</span></div>
-    <div class="sec-body">
-      <div class="field"><label>NÚMERO (con código país)</label><input type="text" id="wspNum" placeholder="56912345678"></div>
-      <div class="field"><label>MENSAJE</label><textarea id="wspMsg" rows="4">🎮🎉 ¡Estás invitado al cumpleaños de RENATO! 🎂
-📅 Viernes 20 de Junio
-⏰ 15:00 hrs
-📍 Contulmo
-¡No faltes! 🍄⭐</textarea></div>
-      <div style="font-family:'Press Start 2P',cursive;font-size:6px;color:#666;line-height:2">💡 Número vacío = elegís<br>el contacto en WhatsApp.</div>
-    </div>
-  </div>
-
-  <!-- 📸 FOTO NIÑO -->
-  <div class="section">
-    <div class="sec-head" onclick="toggleSec(this)"><span>📸 FOTO DEL CUMPLEAÑERO</span><span class="sec-arrow">▶</span></div>
-    <div class="sec-body">
-      <div class="upzone" onclick="document.getElementById('photoInput').click()">
-        <img id="photoThumb" class="uz-thumb" style="border-radius:50%;width:70px;height:70px" src="" alt="">
-        <p id="photoHint">📸 TOCA PARA SUBIR LA FOTO</p>
-        <div class="uz-ok" id="photoOk">✅ FOTO CARGADA</div>
-      </div>
-      <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhoto(event)">
-      <div class="toggle-row" style="margin-top:10px">
-        <span>MOSTRAR FOTO</span>
-        <label class="toggle"><input type="checkbox" id="tPhoto" checked onchange="togglePhoto()"><span class="tslider"></span></label>
-      </div>
-    </div>
-  </div>
-
-  <!-- 🎮 PERSONAJES (con subida de imagen por personaje) -->
-  <div class="section">
-    <div class="sec-head" onclick="toggleSec(this)"><span>🎮 PERSONAJES E IMÁGENES</span><span class="sec-arrow">▶</span></div>
-    <div class="sec-body">
-      <div style="font-family:'Press Start 2P',cursive;font-size:6px;color:#888;line-height:2;margin-bottom:10px">
-        Toca el ojo para mostrar/ocultar.<br>Toca 📁 para cambiar la imagen.
-      </div>
-      <div class="char-up-grid" id="charGrid">
-        <!-- generado por JS -->
-      </div>
-    </div>
-  </div>
-
-  <!-- 🌎 ESCENARIO -->
-  <div class="section">
-    <div class="sec-head" onclick="toggleSec(this)"><span>🌎 ESCENARIO</span><span class="sec-arrow">▶</span></div>
-    <div class="sec-body">
-      <div class="field">
-        <div class="flabel">🖼️ FONDO PERSONALIZADO</div>
-        <div class="upzone" onclick="document.getElementById('bgInput').click()">
-          <img id="bgThumb" style="width:100%;height:60px;object-fit:cover;border-radius:8px;display:none;margin-bottom:4px" src="" alt="">
-          <p id="bgHint">🗺️ SUBÍ TU FONDO DE MARIO</p>
-          <div class="uz-ok" id="bgOk">✅ FONDO CARGADO</div>
-        </div>
-        <input type="file" id="bgInput" accept="image/*" style="display:none" onchange="handleBg(event)">
-      </div>
-      <div class="field"><label>OPACIDAD OVERLAY</label>
-        <input type="range" id="bgOverlayRange" min="0" max="80" value="30" oninput="updateOverlay(this.value)">
-        <div class="range-val" id="overlayVal">30%</div>
-      </div>
-      <div class="field"><label>PRESETS DE CIELO</label>
-        <div class="preset-row" id="skyPresets">
-          <div class="preset-btn active" onclick="applyPreset(this,'sky')">☁️ Cielo</div>
-          <div class="preset-btn" onclick="applyPreset(this,'night')">🌙 Noche</div>
-          <div class="preset-btn" onclick="applyPreset(this,'sunset')">🌅 Atardecer</div>
-          <div class="preset-btn" onclick="applyPreset(this,'cave')">🪨 Cueva</div>
-          <div class="preset-btn" onclick="applyPreset(this,'underwater')">🐟 Agua</div>
-        </div>
-      </div>
-      <div class="toggle-row"><span>NUBES</span><label class="toggle"><input type="checkbox" checked onchange="toggleDecoClass('cloud',this.checked)"><span class="tslider"></span></label></div>
-      <div class="field"><label>COLOR NUBES</label><input type="color" value="#ffffff" oninput="updateCloudColor(this.value)"></div>
-      <div class="toggle-row"><span>PISO</span><label class="toggle"><input type="checkbox" checked onchange="document.getElementById('sceneGround').style.display=this.checked?'':'none'"><span class="tslider"></span></label></div>
-      <div class="field"><label>COLOR PISO</label><input type="color" value="#1E8C25" oninput="document.getElementById('sceneGround').style.background=this.value"></div>
-      <div class="field"><label>ALTURA PISO</label><input type="range" min="20" max="120" value="60" oninput="document.getElementById('sceneGround').style.height=this.value+'px'"></div>
-      <div class="toggle-row"><span>BLOQUES ?</span><label class="toggle"><input type="checkbox" checked onchange="toggleDecoClass('pblock',this.checked)"><span class="tslider"></span></label></div>
-      <div class="field"><label>COLOR BLOQUE</label><input type="color" value="#F4861F" oninput="updateBlockColor(this.value)"></div>
-      <div class="field"><label>TAMAÑO BLOQUE</label><input type="range" min="24" max="60" value="38" oninput="updateBlockSize(this.value)"></div>
-      <div class="field"><label>SÍMBOLO</label>
-        <div class="sym-row">
-          <div class="sym-btn active" onclick="setBlockSym(this,'?')">?</div>
-          <div class="sym-btn" onclick="setBlockSym(this,'!')">!</div>
-          <div class="sym-btn" onclick="setBlockSym(this,'★')">★</div>
-          <div class="sym-btn" onclick="setBlockSym(this,'♥')">♥</div>
-          <div class="sym-btn" onclick="setBlockSym(this,'🍄')" style="font-size:14px">🍄</div>
-          <div class="sym-btn" onclick="setBlockSym(this,'⭐')" style="font-size:14px">⭐</div>
-        </div>
-      </div>
-      <div class="field"><label>CANTIDAD DE BLOQUES</label>
-        <input type="range" min="0" max="8" value="4" oninput="updateBlockCount(this.value)">
-        <div class="range-val" id="blockCountVal">4 bloques</div>
-      </div>
-      <div class="toggle-row"><span>MONEDAS</span><label class="toggle"><input type="checkbox" checked onchange="toggleDecoClass('coin',this.checked)"><span class="tslider"></span></label></div>
-      <div class="field"><label>COLOR MONEDA</label><input type="color" value="#FBD000" oninput="updateCoinColor(this.value)"></div>
-      <div class="field"><label>TAMAÑO MONEDA</label><input type="range" min="12" max="40" value="22" oninput="updateCoinSize(this.value)"></div>
-    </div>
-  </div>
-
-  <!-- 🎨 COLORES TARJETA -->
-  <div class="section">
-    <div class="sec-head" onclick="toggleSec(this)"><span>🎨 COLORES TARJETA</span><span class="sec-arrow">▶</span></div>
-    <div class="sec-body">
-      <div class="field"><label>FONDO</label><input type="color" value="#1a0800" oninput="updateCardBg(this.value)"></div>
-      <div class="field"><label>BORDE</label><input type="color" value="#FBD000" oninput="document.getElementById('card').style.borderColor=this.value"></div>
-      <div class="field"><label>BANNER SUPERIOR</label><input type="color" value="#E8252A" oninput="document.getElementById('topBanner').style.background=this.value"></div>
-      <div class="field"><label>COLOR NOMBRE</label><input type="color" value="#FBD000" oninput="document.getElementById('nameDisplay').style.color=this.value"></div>
-      <div class="field"><label>BANNER INFERIOR</label><input type="color" value="#1E8C25" oninput="document.getElementById('bottomBanner').style.background=this.value"></div>
-      <div class="field"><label>BOTÓN CONFIRMAR</label><input type="color" value="#1E8C25" oninput="document.getElementById('btnConfirm').style.background=this.value"></div>
-    </div>
-  </div>
-
-  <!-- 👁️ VISIBILIDAD -->
-  <div class="section">
-    <div class="sec-head" onclick="toggleSec(this)"><span>👁️ MOSTRAR / OCULTAR</span><span class="sec-arrow">▶</span></div>
-    <div class="sec-body">
-      <div class="toggle-row"><span>BADGE DE EDAD</span><label class="toggle"><input type="checkbox" checked onchange="toggleEl('ageBadge',this.checked)"><span class="tslider"></span></label></div>
-      <div class="toggle-row"><span>FECHA / HORA / LUGAR</span><label class="toggle"><input type="checkbox" checked onchange="toggleEl('infoSection',this.checked)"><span class="tslider"></span></label></div>
-      <div class="toggle-row"><span>BOTÓN CONFIRMAR</span><label class="toggle"><input type="checkbox" checked onchange="toggleEl('confirmSection',this.checked)"><span class="tslider"></span></label></div>
-      <div class="toggle-row"><span>MENSAJE FINAL</span><label class="toggle"><input type="checkbox" checked onchange="toggleEl('bottomBanner',this.checked)"><span class="tslider"></span></label></div>
-    </div>
-  </div>
-
-  <div id="sidebar-footer">
-    <button class="sb-btn wsp" onclick="enviarWhatsApp()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      ENVIAR POR WHATSAPP
-    </button>
-    <button class="sb-btn dl" onclick="descargarImagen()">📲 GUARDAR IMAGEN</button>
-    <button class="sb-btn pr" onclick="window.print()">🖨️ IMPRIMIR</button>
-  </div>
-</div>
-
-<!-- ════ PREVIEW ════ -->
-<div id="preview" class="sky-mode">
-  <div id="bgImg"></div>
-  <div id="bgOverlay" style="background:rgba(0,0,0,.3)"></div>
+<!-- ESCENA + TARJETA -->
+<div id="preview" class="sky-mode" style="display:none">
   <div class="cloud c1" onclick="sfx('coin')"></div>
   <div class="cloud c2" onclick="sfx('coin')"></div>
   <div class="cloud c3" onclick="sfx('coin')"></div>
@@ -437,120 +124,60 @@ input:checked+.tslider::before{transform:translateX(20px)}
 
   <div id="card">
     <div id="topBanner"><div id="bannerText">★ ¡ESTÁS INVITADO! ★</div></div>
+
     <div id="heroRow">
-      <img id="char-mario" class="hero-img" src="" alt="Mario" onclick="sfx('jump')">
-      <div id="kidWrap">
-        <div id="kidPlaceholder" onclick="document.getElementById('photoInput').click()">
-          <span class="ph-icon">📸</span><div class="ph-text">FOTO DE<br>RENATO</div>
-        </div>
-        <img id="kidPhoto" src="" alt="Foto">
+      <img class="hero-img"
+           src="https://www.mariowiki.com/images/thumb/4/42/Mario_SM3DAS.png/200px-Mario_SM3DAS.png"
+           onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/MarioNSMBU.png/120px-MarioNSMBU.png'"
+           alt="Mario" onclick="sfx('jump')">
+      <div id="kidPlaceholder">
+        <span class="ph-icon">🎂</span>
+        <div class="ph-text">RENATO</div>
       </div>
-      <img id="char-bowser" class="hero-img big" src="" alt="Bowser" onclick="sfx('roar')">
+      <img class="hero-img big"
+           src="https://www.mariowiki.com/images/thumb/a/a2/Bowser_SM3DAS.png/200px-Bowser_SM3DAS.png"
+           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Bowser_SM3DAS.png/120px-Bowser_SM3DAS.png'"
+           alt="Bowser" onclick="sfx('roar')">
     </div>
+
     <div class="name-section">
       <span id="celebraText">¡CELEBRA SUS!</span>
       <span id="nameDisplay">RENATO</span>
-      <div class="age-badge" id="ageBadge"><span id="ageNum">5</span><span class="age-label">AÑOS</span></div>
+      <div class="age-badge"><span id="ageNum">5</span><span class="age-label">AÑOS</span></div>
     </div>
+
     <div class="pixel-divider"></div>
-    <div class="info-section" id="infoSection">
-      <div class="info-row"><span class="info-icon">📅</span><div><div class="info-label">FECHA</div><div class="info-value" id="dateDisplay">Viernes 20 de Junio</div></div></div>
-      <div class="info-row"><span class="info-icon">⏰</span><div><div class="info-label">HORA</div><div class="info-value" id="timeDisplay">15:00 hrs</div></div></div>
-      <div class="info-row"><span class="info-icon">📍</span><div><div class="info-label">LUGAR</div><div class="info-value" id="placeDisplay">Contulmo</div><div class="info-note" id="placeNote">⚠️ Dirección por confirmar</div></div></div>
+
+    <div class="info-section">
+      <div class="info-row"><span class="info-icon">📅</span><div><div class="info-label">FECHA</div><div class="info-value">Viernes 20 de Junio</div></div></div>
+      <div class="info-row"><span class="info-icon">⏰</span><div><div class="info-label">HORA</div><div class="info-value">15:00 hrs</div></div></div>
+      <div class="info-row"><span class="info-icon">📍</span><div><div class="info-label">LUGAR</div><div class="info-value">Contulmo</div><div class="info-note" id="placeNote">⚠️ Dirección por confirmar</div></div></div>
     </div>
-    <div class="confirm-section" id="confirmSection">
+
+    <div class="confirm-section">
       <span id="confirmLabel">¿PODÉS ASISTIR?</span>
-      <button id="btnConfirm" onclick="confirmar()"><span id="btnIcon">✅</span><span id="btnText">¡CONFIRMAR ASISTENCIA!</span></button>
+      <button id="btnConfirm" onclick="confirmar()">
+        <span id="btnIcon">✅</span>
+        <span id="btnText">¡CONFIRMAR ASISTENCIA!</span>
+      </button>
     </div>
+
+    <button id="wspBtn" onclick="confirmarWsp()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      CONFIRMAR POR WHATSAPP
+    </button>
+
     <div id="bottomBanner"><div id="bottomText">¡TE ESPERAMOS PARA JUGAR Y CELEBRAR! <span class="heart">❤</span></div></div>
   </div>
 </div>
-</div>
 
 <script>
-/* ══ CHARACTER DATA ══ */
-const CHARS = [
-  {id:'mario', label:'MARIO',   src:'https://www.mariowiki.com/images/thumb/4/42/Mario_SM3DAS.png/200px-Mario_SM3DAS.png',   fallback:'https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/MarioNSMBU.png/120px-MarioNSMBU.png',   big:false, sfx:'jump'},
-  {id:'bowser',label:'BOWSER',  src:'https://www.mariowiki.com/images/thumb/a/a2/Bowser_SM3DAS.png/200px-Bowser_SM3DAS.png', fallback:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Bowser_SM3DAS.png/120px-Bowser_SM3DAS.png', big:true,  sfx:'roar'},
-  {id:'luigi', label:'LUIGI',   src:'https://upload.wikimedia.org/wikipedia/en/thumb/f/f1/LuigiNSMBW.png/120px-LuigiNSMBW.png',  fallback:'',  big:false, sfx:'jump'},
-  {id:'peach', label:'PEACH',   src:'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/Princess_Peach_Stock_Art.png/120px-Princess_Peach_Stock_Art.png', fallback:'', big:false, sfx:'coin'},
-  {id:'toad',  label:'TOAD',    src:'https://upload.wikimedia.org/wikipedia/en/thumb/d/d1/Toad_3D_Land.png/120px-Toad_3D_Land.png', fallback:'', big:false, sfx:'coin'},
-  {id:'yoshi', label:'YOSHI',   src:'https://upload.wikimedia.org/wikipedia/en/thumb/e/e6/Yoshi_NSMBW.png/120px-Yoshi_NSMBW.png',  fallback:'', big:false, sfx:'jump'},
-];
-const charVisible = {mario:true, bowser:true, luigi:false, peach:false, toad:false, yoshi:false};
-const charCustomSrc = {};
-
-function buildCharGrid(){
-  const grid = document.getElementById('charGrid');
-  grid.innerHTML = '';
-  CHARS.forEach(c=>{
-    const div = document.createElement('div');
-    div.className = 'char-up-item' + (charVisible[c.id]?' on':'');
-    div.id = 'charitem-'+c.id;
-    div.innerHTML = `
-      <span class="char-label">${c.label}</span>
-      <img class="char-preview" id="cprev-${c.id}" src="${c.src}" onerror="this.src='${c.fallback}'" alt="${c.label}">
-      <div class="char-vis-toggle ${charVisible[c.id]?'':'off'}" id="ctog-${c.id}" onclick="toggleCharVis('${c.id}')" title="Mostrar/Ocultar">${charVisible[c.id]?'👁':'🚫'}</div>
-      <button class="char-upload-btn" onclick="triggerCharUpload('${c.id}')">📁 CAMBIAR IMAGEN</button>
-      <input type="file" accept="image/*" id="charinput-${c.id}" style="display:none" onchange="handleCharImg(event,'${c.id}')">
-    `;
-    grid.appendChild(div);
-    // Load default src into card
-    loadCharIntoCard(c.id, charCustomSrc[c.id] || c.src, c.fallback);
-  });
-}
-
-function triggerCharUpload(id){ document.getElementById('charinput-'+id).click(); }
-
-function handleCharImg(e, id){
-  const file = e.target.files[0]; if(!file) return;
-  const r = new FileReader();
-  r.onload = ev => {
-    charCustomSrc[id] = ev.target.result;
-    document.getElementById('cprev-'+id).src = ev.target.result;
-    loadCharIntoCard(id, ev.target.result, '');
-    sfx('coin');
-  };
-  r.readAsDataURL(file);
-}
-
-function loadCharIntoCard(id, src, fallback){
-  const c = CHARS.find(x=>x.id===id);
-  let img = document.getElementById('char-'+id);
-  if(!charVisible[id]){ if(img) img.style.display='none'; return; }
-  if(!img){
-    img = document.createElement('img');
-    img.id = 'char-'+id;
-    img.className = 'hero-img'+(c.big?' big':'');
-    img.onclick = ()=>sfx(c.sfx);
-    document.getElementById('heroRow').insertBefore(img, document.getElementById('kidWrap'));
-  }
-  img.src = src;
-  if(fallback) img.onerror = ()=>{ img.src=fallback; img.onerror=null; };
-  img.style.display = 'block';
-}
-
-function toggleCharVis(id){
-  charVisible[id] = !charVisible[id];
-  const tog = document.getElementById('ctog-'+id);
-  const item = document.getElementById('charitem-'+id);
-  tog.textContent = charVisible[id]?'👁':'🚫';
-  tog.classList.toggle('off', !charVisible[id]);
-  item.classList.toggle('on', charVisible[id]);
-  const img = document.getElementById('char-'+id);
-  if(charVisible[id]){
-    const c = CHARS.find(x=>x.id===id);
-    loadCharIntoCard(id, charCustomSrc[id]||c.src, c.fallback);
-  } else {
-    if(img) img.style.display='none';
-  }
-  sfx('coin');
-}
+/* ══ WHATSAPP ══ */
+// Ponés acá tu número con código de país (sin + ni espacios), ej: '56912345678'
+const WSP_NUMBER = '';
 
 /* ══ AUDIO ENGINE ══ */
-let AC, musicPlaying=false, musicGain, fxGain, musicNodes=[], currentMelody='overworld';
-let customMusicAudio=null, usingCustomMusic=false;
-const customFxBuffers = {};
+let AC, musicPlaying=false, musicGain, fxGain, musicNodes=[], melodyTimeout=null, melodyIdx=0;
 
 function initAudio(){
   AC = new (window.AudioContext||window.webkitAudioContext)();
@@ -558,71 +185,14 @@ function initAudio(){
   fxGain    = AC.createGain(); fxGain.gain.value=0.7;    fxGain.connect(AC.destination);
 }
 
-/* custom music */
-function handleCustomMusic(e){
-  const file=e.target.files[0]; if(!file) return;
-  const url=URL.createObjectURL(file);
-  if(customMusicAudio){ customMusicAudio.pause(); customMusicAudio=null; }
-  customMusicAudio = new Audio(url);
-  customMusicAudio.loop=true;
-  document.getElementById('musicUpZone').classList.add('loaded');
-  document.getElementById('musicUpIcon').style.display='block';
-  document.getElementById('musicUpHint').style.display='none';
-  document.getElementById('musicUpOk').style.display='block';
-  document.getElementById('btnCustom').style.display='block';
-  switchToCustom(document.getElementById('btnCustom'));
-  sfx('coin');
-}
-function switchToBuiltin(el){
-  document.getElementById('btnBuiltin').classList.add('active');
-  document.getElementById('btnCustom').classList.remove('active');
-  document.getElementById('melodyPresets').style.opacity='1';
-  document.getElementById('melodyPresets').style.pointerEvents='';
-  usingCustomMusic=false;
-  if(customMusicAudio){ customMusicAudio.pause(); }
-  if(musicPlaying){ stopMelody(); melodyIdx=0; playMelody(); }
-}
-function switchToCustom(el){
-  if(!customMusicAudio) return;
-  document.getElementById('btnCustom').classList.add('active');
-  document.getElementById('btnBuiltin').classList.remove('active');
-  document.getElementById('melodyPresets').style.opacity='.3';
-  document.getElementById('melodyPresets').style.pointerEvents='none';
-  usingCustomMusic=true;
-  stopMelody();
-  if(musicPlaying){ customMusicAudio.volume=0.4; customMusicAudio.play(); }
-}
+const melody=[[659,.1],[659,.1],[0,.1],[659,.1],[0,.1],[523,.1],[659,.15],[784,.2],[0,.2],[392,.2],[0,.3],[523,.15],[0,.2],[392,.15],[0,.2],[330,.15],[0,.1],[440,.1],[494,.1],[466,.1],[440,.15],[0,.05],[392,.12],[659,.12],[784,.15],[880,.12],[698,.1],[784,.1],[0,.05],[659,.15],[0,.05],[523,.1],[587,.1],[494,.2],[0,.3]];
 
-/* custom fx */
-function uploadFx(type){ document.querySelector(`#slot-${type} input[type=file]`).click(); }
-function handleFx(e,type){
-  const file=e.target.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    AC.decodeAudioData(ev.target.result.slice(0), buf=>{
-      customFxBuffers[type]=buf;
-      const slot=document.getElementById('slot-'+type);
-      slot.classList.add('loaded');
-    });
-  };
-  reader.readAsArrayBuffer(file);
-}
-
-/* melodies */
-const melodies={
-  overworld:[[659,.1],[659,.1],[0,.1],[659,.1],[0,.1],[523,.1],[659,.15],[784,.2],[0,.2],[392,.2],[0,.3],[523,.15],[0,.2],[392,.15],[0,.2],[330,.15],[0,.1],[440,.1],[494,.1],[466,.1],[440,.15],[0,.05],[392,.12],[659,.12],[784,.15],[880,.12],[698,.1],[784,.1],[0,.05],[659,.15],[0,.05],[523,.1],[587,.1],[494,.2],[0,.3]],
-  underground:[[294,.1],[0,.05],[294,.1],[0,.1],[294,.1],[0,.1],[349,.2],[0,.05],[294,.1],[0,.1],[262,.3],[0,.2],[247,.3],[0,.4],[233,.1],[0,.05],[220,.2],[0,.05],[247,.1],[0,.1],[262,.35],[0,.3]],
-  star:[[988,.1],[988,.1],[988,.1],[784,.2],[988,.2],[1319,.3],[0,.3],[659,.3],[0,.3],[523,.2],[0,.1],[440,.2],[0,.1],[659,.2],[0,.1],[784,.2],[0,.1],[698,.15],[784,.1],[0,.05],[659,.2],[0,.1],[523,.15],[587,.15],[494,.3]],
-  castle:[[196,.2],[0,.1],[196,.15],[0,.05],[196,.15],[0,.1],[196,.2],[208,.15],[0,.05],[208,.2],[0,.1],[196,.2],[0,.1],[175,.15],[196,.15],[0,.1],[147,.3],[0,.3],[220,.15],[0,.05],[220,.2],[196,.15],[0,.1],[175,.3]],
-};
-let melodyTimeout=null, melodyIdx=0;
 function playMelody(){
-  if(!AC||!musicPlaying||usingCustomMusic) return;
-  const notes=melodies[currentMelody], note=notes[melodyIdx];
+  if(!AC||!musicPlaying) return;
+  const note=melody[melodyIdx];
   if(note[0]>0) playTone(note[0],note[1],musicGain,0.15,'square');
-  melodyTimeout=setTimeout(()=>{ melodyIdx=(melodyIdx+1)%notes.length; playMelody(); },note[1]*1000+20);
+  melodyTimeout=setTimeout(()=>{ melodyIdx=(melodyIdx+1)%melody.length; playMelody(); },note[1]*1000+20);
 }
-function stopMelody(){ clearTimeout(melodyTimeout); musicNodes.forEach(n=>{try{n.stop()}catch(e){}}); musicNodes=[]; }
 function playTone(freq,dur,gain,vol=0.15,type='square'){
   if(!AC) return;
   const o=AC.createOscillator(), g=AC.createGain();
@@ -633,13 +203,8 @@ function playTone(freq,dur,gain,vol=0.15,type='square'){
   o.start(); o.stop(AC.currentTime+dur+0.05);
   musicNodes.push(o);
 }
-
 function sfx(type){
-  if(!AC||!document.getElementById('tFx').checked) return;
-  if(customFxBuffers[type]){
-    const src=AC.createBufferSource(); src.buffer=customFxBuffers[type];
-    src.connect(fxGain); src.start(); return;
-  }
+  if(!AC) return;
   const g=fxGain;
   if(type==='coin'){ playTone(988,.08,g,.3,'sine'); setTimeout(()=>playTone(1319,.15,g,.3,'sine'),90); }
   else if(type==='jump'){ const o=AC.createOscillator(),gn=AC.createGain(); o.type='square'; o.frequency.setValueAtTime(300,AC.currentTime); o.frequency.exponentialRampToValueAtTime(600,AC.currentTime+.12); gn.gain.setValueAtTime(.2,AC.currentTime); gn.gain.exponentialRampToValueAtTime(.001,AC.currentTime+.15); o.connect(gn); gn.connect(g); o.start(); o.stop(AC.currentTime+.18); }
@@ -650,89 +215,53 @@ function sfx(type){
   else if(type==='firework'){ const o=AC.createOscillator(),gn=AC.createGain(); o.type='sine'; o.frequency.setValueAtTime(800+Math.random()*400,AC.currentTime); o.frequency.exponentialRampToValueAtTime(200,AC.currentTime+.3); gn.gain.setValueAtTime(.2,AC.currentTime); gn.gain.exponentialRampToValueAtTime(.001,AC.currentTime+.35); o.connect(gn); gn.connect(g); o.start(); o.stop(AC.currentTime+.38); }
 }
 
-function toggleMusic(){
-  if(!AC) return;
-  if(musicPlaying){
-    stopMelody();
-    if(customMusicAudio) customMusicAudio.pause();
-    musicPlaying=false;
-  } else {
-    musicPlaying=true;
-    if(usingCustomMusic && customMusicAudio){ customMusicAudio.play(); }
-    else { melodyIdx=0; playMelody(); }
-  }
-  updateMusicUI();
-}
-function updateMusicUI(){
-  document.getElementById('musicToggleBtn').textContent=musicPlaying?'⏸ PAUSAR':'▶ PLAY';
-  document.getElementById('musicStatus').textContent=musicPlaying?'♪ ON':'♪ OFF';
-  document.querySelectorAll('.eq-bar').forEach(b=>b.classList.toggle('paused',!musicPlaying));
-}
-function setMusicVol(v){
-  if(musicGain) musicGain.gain.value=v/100;
-  if(customMusicAudio) customMusicAudio.volume=v/100;
-}
-function setFxVol(v){ if(fxGain) fxGain.gain.value=v/100; }
-function setMelody(el,name){
-  document.querySelectorAll('#melodyPresets .preset-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active'); currentMelody=name;
-  if(musicPlaying&&!usingCustomMusic){ stopMelody(); melodyIdx=0; playMelody(); }
-}
-
 /* ══ START ══ */
 function startApp(){
   initAudio();
   document.getElementById('introScreen').style.display='none';
-  document.getElementById('app').style.display='flex';
-  buildCharGrid();
+  document.getElementById('preview').style.display='flex';
   musicPlaying=true; melodyIdx=0; playMelody();
   sfx('oneup');
   setTimeout(()=>{ for(let i=0;i<4;i++) setTimeout(createFirework,i*200); },300);
 }
 
-/* ══ EDITOR ══ */
-function toggleSec(h){ const b=h.nextElementSibling,a=h.querySelector('.sec-arrow'); a.textContent=b.classList.toggle('open')?'▼':'▶'; }
-function sync(id,v){ const e=document.getElementById(id); if(e) e.textContent=v; }
-function syncName(v){ v=v.toUpperCase(); document.getElementById('nameDisplay').textContent=v; document.getElementById('iName').value=v; document.getElementById('kidPlaceholder').querySelector('.ph-text').innerHTML='FOTO DE<br>'+v; }
-function syncBtn(v){ const e=document.getElementById('btnText'); if(!document.getElementById('btnConfirm').classList.contains('confirmed')) e.textContent=v; }
-function syncBottom(v){ document.getElementById('bottomText').innerHTML=v+' <span class="heart">❤</span>'; }
-function syncNote(v){ const e=document.getElementById('placeNote'); e.textContent=v; e.style.display=v?'block':'none'; }
-
-let kidPhotoData=null;
-function handlePhoto(e){ const file=e.target.files[0]; if(!file) return; const r=new FileReader(); r.onload=ev=>{ kidPhotoData=ev.target.result; document.getElementById('photoThumb').src=kidPhotoData; document.getElementById('photoThumb').style.display='block'; document.getElementById('photoHint').style.display='none'; document.getElementById('photoOk').style.display='block'; document.getElementById('photoInput').closest('.upzone').classList.add('loaded'); if(document.getElementById('tPhoto').checked) showKidPhoto(true); sfx('coin'); }; r.readAsDataURL(file); }
-function togglePhoto(){ showKidPhoto(document.getElementById('tPhoto').checked&&!!kidPhotoData); }
-function showKidPhoto(show){ document.getElementById('kidPhoto').style.display=show?'block':'none'; document.getElementById('kidPlaceholder').style.display=show?'none':'flex'; if(show&&kidPhotoData) document.getElementById('kidPhoto').src=kidPhotoData; }
-
-function handleBg(e){ const file=e.target.files[0]; if(!file) return; const r=new FileReader(); r.onload=ev=>{ const t=document.getElementById('bgThumb'); t.src=ev.target.result; t.style.display='block'; document.getElementById('bgHint').style.display='none'; document.getElementById('bgOk').style.display='block'; document.getElementById('bgInput').closest('.upzone').classList.add('loaded'); const bg=document.getElementById('bgImg'); bg.style.backgroundImage='url('+ev.target.result+')'; bg.style.opacity='1'; document.getElementById('preview').classList.remove('sky-mode'); document.querySelectorAll('#skyPresets .preset-btn').forEach(b=>b.classList.remove('active')); }; r.readAsDataURL(file); }
-function updateOverlay(v){ document.getElementById('bgOverlay').style.background='rgba(0,0,0,'+v/100+')'; document.getElementById('overlayVal').textContent=v+'%'; }
-const presets={sky:{cls:'sky-mode',bg:'',ol:0},night:{cls:'',bg:'linear-gradient(180deg,#0a0020,#1a0060 60%,#000)',ol:0},sunset:{cls:'',bg:'linear-gradient(180deg,#ff4500,#ff7b2f 40%,#ffd54f 80%,#ff9a00)',ol:0},cave:{cls:'',bg:'linear-gradient(180deg,#0d0800,#2a1200 50%,#1a0a00)',ol:40},underwater:{cls:'',bg:'linear-gradient(180deg,#003a5c,#0077b6 60%,#0096c7)',ol:0}};
-function applyPreset(el,name){ document.querySelectorAll('#skyPresets .preset-btn').forEach(b=>b.classList.remove('active')); el.classList.add('active'); const p=presets[name],prev=document.getElementById('preview'); prev.className=''; if(p.cls) prev.classList.add(p.cls); prev.style.backgroundImage=p.bg||''; if(!p.bg) prev.style.background=''; document.getElementById('bgImg').style.opacity=name==='sky'?'0':''; document.getElementById('bgOverlayRange').value=p.ol; updateOverlay(p.ol); }
-function toggleDecoClass(cls,show){ document.querySelectorAll('.'+cls).forEach(e=>e.style.visibility=show?'':'hidden'); }
-function updateCloudColor(v){ document.querySelectorAll('.cloud').forEach(c=>{c.style.background=v;c.querySelectorAll('*').forEach(ch=>ch.style.background=v);}); }
-function updateBlockColor(v){ document.querySelectorAll('.pblock').forEach(b=>b.style.background=v); }
-function updateBlockSize(v){ document.querySelectorAll('.pblock').forEach(b=>{b.style.width=v+'px';b.style.height=v+'px';b.style.fontSize=Math.round(v*.37)+'px';}); }
-let blockSym='?';
-function setBlockSym(el,sym){ document.querySelectorAll('.sym-btn').forEach(b=>b.classList.remove('active')); el.classList.add('active'); blockSym=sym; document.querySelectorAll('.pblock').forEach(b=>b.textContent=sym); }
-const bpos=[{bottom:'68px',left:'5%'},{bottom:'68px',right:'7%'},{bottom:'68px',left:'23%'},{bottom:'68px',right:'23%'},{bottom:'110px',left:'14%'},{bottom:'110px',right:'14%'},{bottom:'110px',left:'40%'},{bottom:'68px',left:'42%'}];
-function updateBlockCount(n){ document.getElementById('blockCountVal').textContent=n+' bloque'+(n==1?'':'s'); const first=document.querySelector('.pblock'); const bg=first?.style.background||'#F4861F',size=first?.style.width||'38px',fs=first?.style.fontSize||'14px'; document.querySelectorAll('.pblock').forEach(b=>b.remove()); for(let i=0;i<n;i++){ const b=document.createElement('div'); b.className='pblock'; const pos=bpos[i]||{bottom:'68px',left:(5+i*11)+'%'}; Object.assign(b.style,pos,{width:size,height:size,background:bg,border:'3px solid #7B3F00',fontSize:fs,color:'#FBD000',animationDelay:(i*.4)+'s'}); b.textContent=blockSym; b.onclick=()=>hitBlock(b); document.getElementById('preview').appendChild(b); }}
-function updateCoinColor(v){ document.querySelectorAll('.coin').forEach(c=>{c.style.background=v;c.style.borderColor=shade(v,-20);}); }
-function updateCoinSize(v){ document.querySelectorAll('.coin').forEach(c=>{c.style.width=v+'px';c.style.height=v+'px';}); }
-function shade(hex,p){ let n=parseInt(hex.replace('#',''),16); return '#'+[n>>16,n>>8&255,n&255].map(x=>Math.min(255,Math.max(0,x+p)).toString(16).padStart(2,'0')).join(''); }
-function updateCardBg(v){ document.getElementById('card').style.background=`linear-gradient(160deg,${v},${shade(v,20)} 40%,${v})`; }
-function toggleEl(id,show){ document.getElementById(id).style.display=show?'':'none'; }
-
-function hitBlock(el){ sfx('block'); el.style.animation='none'; el.style.transform='translateY(-12px) scale(1.15)'; setTimeout(()=>{el.style.transform='';el.style.animation='';},300); const rect=el.getBoundingClientRect(); showScorePop('+100',rect.left+rect.width/2,rect.top); setTimeout(()=>sfx('coin'),150); }
-function collectCoin(el){ sfx('coin'); el.style.animation='coinCollect .4s ease-out forwards'; showScorePop('+200',el.getBoundingClientRect().left,el.getBoundingClientRect().top); setTimeout(()=>{el.style.animation='coinSpin 1.5s linear infinite,coinFloat 3s ease-in-out infinite';},2000); }
+/* ══ INTERACTIVIDAD ══ */
+function hitBlock(el){
+  sfx('block'); el.style.animation='none'; el.style.transform='translateY(-12px) scale(1.15)';
+  setTimeout(()=>{el.style.transform='';el.style.animation='';},300);
+  const rect=el.getBoundingClientRect(); showScorePop('+100',rect.left+rect.width/2,rect.top);
+  setTimeout(()=>sfx('coin'),150);
+}
+function collectCoin(el){
+  sfx('coin'); el.style.animation='coinCollect .4s ease-out forwards';
+  showScorePop('+200',el.getBoundingClientRect().left,el.getBoundingClientRect().top);
+  setTimeout(()=>{el.style.animation='coinSpin 1.5s linear infinite,coinFloat 3s ease-in-out infinite';},2000);
+}
 function showScorePop(text,x,y){ const d=document.createElement('div'); d.className='score-pop'; d.textContent=text; d.style.left=x+'px'; d.style.top=y+'px'; document.body.appendChild(d); setTimeout(()=>d.remove(),1000); }
 
-function confirmar(){ const btn=document.getElementById('btnConfirm'); if(btn.classList.contains('confirmed')) return; btn.classList.add('confirmed'); document.getElementById('btnIcon').textContent='⭐'; document.getElementById('btnText').textContent='¡NOS VEMOS ALLÁ!'; sfx('confirm'); for(let i=0;i<10;i++) setTimeout(()=>{createFirework();sfx('firework');},i*200); }
+function confirmar(){
+  const btn=document.getElementById('btnConfirm');
+  if(btn.classList.contains('confirmed')) return;
+  btn.classList.add('confirmed');
+  document.getElementById('btnIcon').textContent='⭐';
+  document.getElementById('btnText').textContent='¡NOS VEMOS ALLÁ!';
+  sfx('confirm');
+  for(let i=0;i<10;i++) setTimeout(()=>{createFirework();sfx('firework');},i*200);
+}
 
+function confirmarWsp(){
+  sfx('confirm');
+  const msg='🎮🎉 ¡Confirmo mi asistencia al cumpleaños de RENATO!\n📅 Viernes 20 de Junio\n⏰ 15:00 hrs\n📍 Contulmo\n¡Nos vemos! 🍄⭐';
+  const url=WSP_NUMBER
+    ? 'https://wa.me/'+WSP_NUMBER+'?text='+encodeURIComponent(msg)
+    : 'https://wa.me/?text='+encodeURIComponent(msg);
+  window.open(url,'_blank');
+  confirmar();
+}
+
+/* ══ FUEGOS ARTIFICIALES ══ */
 function createFirework(){ const fw=document.createElement('div'); fw.className='firework'; fw.style.left=(Math.random()*window.innerWidth)+'px'; fw.style.top=(Math.random()*window.innerHeight*.65)+'px'; const colors=['#FBD000','#E8252A','#0868B0','#1E8C25','#F4861F','#fff']; for(let i=0;i<12;i++){ const s=document.createElement('div'); s.className='spark'; const a=(i/12)*Math.PI*2,d=45+Math.random()*45; s.style.setProperty('--tx',Math.cos(a)*d+'px'); s.style.setProperty('--ty',Math.sin(a)*d+'px'); s.style.background=colors[~~(Math.random()*colors.length)]; s.style.animationDelay=(Math.random()*.3)+'s'; s.style.animationDuration=(1+Math.random())+'s'; fw.appendChild(s); } document.body.appendChild(fw); setTimeout(()=>fw.remove(),2500); }
 setInterval(createFirework,3000);
-
-function enviarWhatsApp(){ sfx('coin'); const num=(document.getElementById('wspNum').value||'').replace(/\D/g,''); const name=document.getElementById('iName').value||'RENATO'; let msg=document.getElementById('wspMsg').value.replace(/RENATO/g,name); const url=num?`https://wa.me/${num}?text=${encodeURIComponent(msg)}`:`https://wa.me/?text=${encodeURIComponent(msg)}`; window.open(url,'_blank'); }
-
-async function descargarImagen(){ sfx('oneup'); const btn=document.querySelector('.sb-btn.dl'); btn.textContent='⏳ GENERANDO...'; btn.disabled=true; const hide=document.querySelectorAll('.cloud,.coin,.pblock,.firework,.score-pop'); hide.forEach(e=>e.style.visibility='hidden'); try{ const canvas=await html2canvas(document.getElementById('card'),{scale:3,useCORS:true,allowTaint:true,backgroundColor:null,logging:false}); const a=document.createElement('a'); a.download='invitacion-'+(document.getElementById('iName').value||'renato').toLowerCase()+'.png'; a.href=canvas.toDataURL('image/png'); a.click(); }catch(e){alert('Error al generar imagen.');} hide.forEach(e=>e.style.visibility=''); btn.textContent='📲 GUARDAR IMAGEN'; btn.disabled=false; }
 </script>
 </body>
 </html>
